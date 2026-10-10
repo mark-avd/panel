@@ -187,8 +187,9 @@ export function UsersTrafficCard({ nodeId, nodesData = [] }: UsersTrafficCardPro
         <TooltipTrigger asChild>
           <button
             type="button"
+            disabled={isPlaceholderData}
             onClick={() => openUsage(user.user_id)}
-            className={cn(ROW_GRID, 'hover:bg-muted/50 focus-visible:ring-ring w-full rounded-md text-start focus-visible:ring-2 focus-visible:outline-none')}
+            className={cn(ROW_GRID, 'hover:bg-muted/50 focus-visible:ring-ring w-full rounded-md text-start focus-visible:ring-2 focus-visible:outline-none disabled:pointer-events-none')}
           >
             <span className="text-muted-foreground col-start-1 row-start-1 text-sm tabular-nums">{index + 1}</span>
             <span className="col-start-2 row-start-1 flex min-w-0 items-center gap-1.5">
