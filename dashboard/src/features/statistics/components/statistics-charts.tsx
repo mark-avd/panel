@@ -20,11 +20,23 @@ interface StatisticsChartsProps {
   selectedServer: string
   canViewNodeStats: boolean
   canViewSystemStats: boolean
+  canViewUsers: boolean
   nodesData?: NodeSimple[]
   isLoadingNodes?: boolean
 }
 
-export default function StatisticsCharts({ data, usersData, isLoading, error, selectedServer, canViewNodeStats, canViewSystemStats, nodesData = [], isLoadingNodes = false }: StatisticsChartsProps) {
+export default function StatisticsCharts({
+  data,
+  usersData,
+  isLoading,
+  error,
+  selectedServer,
+  canViewNodeStats,
+  canViewSystemStats,
+  canViewUsers,
+  nodesData = [],
+  isLoadingNodes = false,
+}: StatisticsChartsProps) {
   const { t } = useTranslation()
 
   // Add state for chart refresh
@@ -141,9 +153,11 @@ export default function StatisticsCharts({ data, usersData, isLoading, error, se
             {actualSelectedServer === 'master' ? <AllNodesStackedBarChart /> : <CostumeBarChart nodeId={selectedNodeId} />}
           </div>
         )}
-        <div className="transform-gpu">
-          <UsersTrafficCard nodeId={selectedNodeId} nodesData={nodesData} />
-        </div>
+        {canViewUsers && (
+          <div className="transform-gpu">
+            <UsersTrafficCard nodeId={selectedNodeId} nodesData={nodesData} />
+          </div>
+        )}
         <div className="transform-gpu">
           <UserCountsChart nodeId={selectedNodeId} isSudo={canViewNodeStats} nodesData={nodesData} />
         </div>
